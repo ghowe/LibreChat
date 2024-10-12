@@ -261,8 +261,8 @@ class ChatGPTClient extends BaseClient {
     }
 
     if (this.useOpenRouter) {
-      opts.headers['HTTP-Referer'] = 'https://librechat.ai';
-      opts.headers['X-Title'] = 'LibreChat';
+      opts.headers['HTTP-Referer'] = 'https://MyLifeCare.ai';
+      opts.headers['X-Title'] = 'LifeCare';
     }
 
     if (this.options.proxy) {

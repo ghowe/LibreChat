@@ -62,8 +62,8 @@ function getLLMConfig(apiKey, options = {}) {
     configOptions.baseOptions = {
       headers: Object.assign(
         {
-          'HTTP-Referer': 'https://librechat.ai',
-          'X-Title': 'LibreChat',
+          'HTTP-Referer': 'https://MyLifeCare.ai',
+          'X-Title': 'MyLifeCare',
         },
         headers,
       ),

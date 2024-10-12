@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/danny-avila/LibreChat/issues"
   },
-  "homepage": "https://librechat.ai",
+  "homepage": "https://MyLifeCare.ai",
   "dependencies": {
     "@ariakit/react": "^0.4.11",
     "@codesandbox/sandpack-react": "^2.18.2",
