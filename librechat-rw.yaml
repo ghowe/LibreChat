@@ -1,9 +1,9 @@
-version: 1.1.7
+version: 1.1.6
 
 cache: false
 
 registration:
-  socialLogins: ["discord", "facebook", "github", "google", "openid"]
+  socialLogins: ["facebook", "github", "google", "openid"]
 
 endpoints:
   custom:
