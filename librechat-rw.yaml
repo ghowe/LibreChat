@@ -8,7 +8,7 @@ registration:
 endpoints:
   custom:
     # Anyscale
-    # # Model list: https://console.anyscale.com/v2/playground
+    # Model list: https://console.anyscale.com/v2/playground
 
 
     # APIpie
