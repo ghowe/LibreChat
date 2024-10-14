@@ -3,13 +3,14 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import type { NavLink, NavProps } from '~/common';
 import { Accordion, AccordionItem, AccordionContent } from '~/components/ui/Accordion';
 import { TooltipAnchor, Button } from '~/components';
-import { useLocalize } from '~/hooks';
+import { useAuthContext, useLocalize } from '~/hooks';
 import { cn } from '~/utils';
 
 export default function Nav({ links, isCollapsed, resize, defaultActive }: NavProps) {
   const localize = useLocalize();
   const [active, _setActive] = useState<string | undefined>(defaultActive);
   const getVariant = (link: NavLink) => (link.id === active ? 'default' : 'ghost');
+  const { user } = useAuthContext(); // Get user data from Auth context
 
   const setActive = (id: string) => {
     localStorage.setItem('side:active-panel', id + '');
@@ -25,7 +26,11 @@ export default function Nav({ links, isCollapsed, resize, defaultActive }: NavPr
         <div className="flex h-full min-h-0 flex-col">
           <div className="flex h-full min-h-0 flex-col opacity-100 transition-opacity">
             <div className="scrollbar-trigger relative h-full w-full flex-1 items-start border-white/20">
-              <div className="flex h-full w-full flex-col gap-1 px-3 pb-3.5 group-[[data-collapsed=true]]:items-center group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
+              <div
+                className={`flex h-full w-full flex-col gap-1 px-3 pb-3.5 group-[[data-collapsed=true]]:items-center group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2 ${
+                  user && user.role === 'USER' ? 'pt-[12px]' : ''
+                }`}
+              >
                 {links.map((link, index) => {
                   const variant = getVariant(link);
                   return isCollapsed ? (

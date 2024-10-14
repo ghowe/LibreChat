@@ -9,7 +9,7 @@ import {
 import type { ImperativePanelHandle } from 'react-resizable-panels';
 import type { TEndpointsConfig } from 'librechat-data-provider';
 import { ResizableHandleAlt, ResizablePanel, ResizablePanelGroup } from '~/components/ui/Resizable';
-import { useMediaQuery, useLocalStorage, useLocalize } from '~/hooks';
+import { useMediaQuery, useLocalStorage, useLocalize, useAuthContext } from '~/hooks';
 import useSideNavLinks from '~/hooks/Nav/useSideNavLinks';
 import NavToggle from '~/components/Nav/NavToggle';
 import { cn, getEndpointField } from '~/utils';
@@ -68,6 +68,7 @@ const SidePanel = ({
     () => startupConfig?.interface ?? defaultInterface,
     [startupConfig],
   );
+  const { user } = useAuthContext(); // Get user data from Auth context
 
   const isSmallScreen = useMediaQuery('(max-width: 767px)');
   const { conversation } = useChatContext();
@@ -115,6 +116,8 @@ const SidePanel = ({
     endpointType,
     interfaceConfig,
   });
+
+  // console.log(Links, 'Links');
 
   const calculateLayout = useCallback(() => {
     if (!artifacts) {
@@ -177,7 +180,7 @@ const SidePanel = ({
   }, [isCollapsed, newUser, setNewUser, navCollapsedSize]);
 
   const minSizeMain = useMemo(() => (artifacts != null ? 15 : 30), [artifacts]);
-
+  console.log(interfaceConfig.modelSelect, 'interfaceConfig.modelSelect');
   return (
     <>
       <ResizablePanelGroup
@@ -261,7 +264,7 @@ const SidePanel = ({
               : 'opacity-100',
           )}
         >
-          {interfaceConfig.modelSelect && (
+          {interfaceConfig.modelSelect && user && user.role !== 'USER' && (
             <div
               className={cn(
                 'sticky left-0 right-0 top-0 z-[100] flex h-[52px] flex-wrap items-center justify-center bg-background',
