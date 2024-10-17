@@ -4,6 +4,7 @@ import { startTransition, useMemo, useState, useEffect, useRef, memo } from 'rea
 import { cn } from '~/utils';
 import type { OptionWithIcon } from '~/common';
 import { Search } from 'lucide-react';
+import { useAuthContext } from '~/hooks/AuthContext'; // Import the Auth context
 
 interface ControlComboboxProps {
   selectedValue: string;
@@ -28,6 +29,13 @@ function ControlCombobox({
   isCollapsed,
   SelectIcon,
 }: ControlComboboxProps) {
+  const { user } = useAuthContext(); // Get user data from Auth context
+
+  // Return null if the user's role is "USER"
+  if (user && user.role === 'USER') {
+    return null;
+  }
+
   const [searchValue, setSearchValue] = useState('');
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [buttonWidth, setButtonWidth] = useState<number | null>(null);

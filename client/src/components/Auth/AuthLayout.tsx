@@ -79,6 +79,18 @@ function AuthLayout({
             </h1>
           )}
           {children}
+          <div
+            className={`rounded-[10px] border border-[#E958661A] bg-[#E958661A] p-[15px] text-center text-[12px]`}
+          >
+            <h3 className={`text-[24px] text-[#E95866]`}>Disclaimer</h3>
+            <p className={`text-[#E95866]`}>
+              “This tool does not provide medical advice It is intended for research & informational
+              purposes only. It is not a substitute for professional medical advice, diagnosis or
+              treatment. Never ignore professional medical advice in seeking treatment because of
+              something you have read on the MyLifeCare.ai Site. If you think you may have a medical
+              emergency, immediately call your doctor or dial 911.”
+            </p>
+          </div>
           {(pathname.includes('login') || pathname.includes('register')) && (
             <SocialLoginRender startupConfig={startupConfig} />
           )}

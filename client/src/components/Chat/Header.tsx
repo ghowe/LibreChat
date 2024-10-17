@@ -9,6 +9,7 @@ import { useMediaQuery, useHasAccess } from '~/hooks';
 import HeaderOptions from './Input/HeaderOptions';
 import BookmarkMenu from './Menus/BookmarkMenu';
 import AddMultiConvo from './AddMultiConvo';
+import { useAuthContext } from '~/hooks/AuthContext'; // Import the Auth context
 
 const defaultInterface = getConfigDefaults().interface;
 
@@ -20,6 +21,8 @@ export default function Header() {
     () => startupConfig?.interface ?? defaultInterface,
     [startupConfig],
   );
+
+  const { user } = useAuthContext(); // Get user data from Auth context
 
   const hasAccessToBookmarks = useHasAccess({
     permissionType: PermissionTypes.BOOKMARKS,
@@ -37,13 +40,14 @@ export default function Header() {
     <div className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-white p-2 font-semibold dark:bg-gray-800 dark:text-white">
       <div className="hide-scrollbar flex w-full items-center justify-between gap-2 overflow-x-auto">
         <div className="flex items-center gap-2">
-          {!navVisible && <HeaderNewChat />}
+          {/* {!navVisible && <HeaderNewChat />} */}
           {interfaceConfig.endpointsMenu === true && <EndpointsMenu />}
           {modelSpecs.length > 0 && <ModelSpecsMenu modelSpecs={modelSpecs} />}
-          {<HeaderOptions interfaceConfig={interfaceConfig} />}
-          {interfaceConfig.presets === true && <PresetsMenu />}
+          {user && user.role !== 'USER' && <HeaderOptions interfaceConfig={interfaceConfig} />}
+          {user && user.role !== 'USER' && interfaceConfig.presets === true && <PresetsMenu />}{' '}
+          {/* Conditional rendering */}
           {hasAccessToBookmarks === true && <BookmarkMenu />}
-          {hasAccessToMultiConvo === true && <AddMultiConvo />}
+          {user && user.role !== 'USER' && hasAccessToMultiConvo === true && <AddMultiConvo />}
           {isSmallScreen && (
             <ExportAndShareMenu
               isSharedButtonEnabled={startupConfig?.sharedLinksEnabled ?? false}

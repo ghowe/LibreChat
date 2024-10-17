@@ -9,6 +9,13 @@ cache: true
 
 # Custom interface configuration
 interface:
+  # UI settings
+  # parameters: false
+  # modelSelect: false
+  # sidePanel: true
+  # presets: true
+  # prompts: false
+
   # Privacy policy settings
   privacyPolicy:
     externalUrl: 'https://librechat.ai/privacy-policy'
@@ -19,7 +26,7 @@ interface:
     externalUrl: 'https://librechat.ai/tos'
     openNewTab: true
     modalAcceptance: true
-    modalTitle: "Terms of Service for LibreChat"
+    modalTitle: 'Terms of Service for LibreChat'
     modalContent: |
       # Terms and Conditions for LibreChat
 
@@ -56,7 +63,7 @@ interface:
       If you have any questions about these Terms, please contact us at contact@librechat.ai.
 
       By using the Website, you acknowledge that you have read these Terms of Service and agree to be bound by them.
-    
+
 # Example Registration Object Structure (optional)
 registration:
   socialLogins: ['github', 'google', 'discord', 'openid', 'facebook']
@@ -71,7 +78,7 @@ registration:
 #       model: ''
 #       voices: ['']
 
-#  
+#
 #   stt:
 #     openai:
 #       url: ''
@@ -93,7 +100,7 @@ registration:
 # Definition of custom endpoints
 endpoints:
   # assistants:
-  #   disableBuilder: false # Disable Assistants Builder Interface by setting to `true`
+    disableBuilder: true # Disable Assistants Builder Interface by setting to `true`
   #   pollIntervalMs: 3000  # Polling interval for checking assistant updates
   #   timeoutMs: 180000  # Timeout for assistant operations
   #   # Should only be one or the other, either `supportedIds` or `excludedIds`

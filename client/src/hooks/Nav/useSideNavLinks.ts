@@ -18,6 +18,7 @@ import Parameters from '~/components/SidePanel/Parameters/Panel';
 import FilesPanel from '~/components/SidePanel/Files/Panel';
 import { Blocks, AttachmentIcon } from '~/components/svg';
 import { useHasAccess } from '~/hooks';
+import { useAuthContext } from '~/hooks/AuthContext'; // Import the Auth context
 
 export default function useSideNavLinks({
   hidePanel,
@@ -36,17 +37,26 @@ export default function useSideNavLinks({
   endpointType?: EModelEndpoint | null;
   interfaceConfig: Partial<TInterfaceConfig>;
 }) {
+  const { user } = useAuthContext(); // Get user data from Auth context
+
   const hasAccessToPrompts = useHasAccess({
     permissionType: PermissionTypes.PROMPTS,
     permission: Permissions.USE,
   });
+
   const hasAccessToBookmarks = useHasAccess({
     permissionType: PermissionTypes.BOOKMARKS,
     permission: Permissions.USE,
   });
 
+  console.log(keyProvided, 'keyProvided');
+
   const Links = useMemo(() => {
     const links: NavLink[] = [];
+
+    // Check if the user role is not "USER"
+    const isUserRole = user && user.role === 'USER';
+
     if (
       isAssistantsEndpoint(endpoint) &&
       assistants &&
@@ -67,7 +77,7 @@ export default function useSideNavLinks({
       isAgentsEndpoint(endpoint) &&
       agents &&
       // agents.disableBuilder !== true &&
-      keyProvided &&
+      // keyProvided &&
       interfaceConfig.parameters === true
     ) {
       links.push({
@@ -79,7 +89,9 @@ export default function useSideNavLinks({
       });
     }
 
-    if (hasAccessToPrompts) {
+    // Hide prompts and model parameters for user role
+    if (hasAccessToPrompts && !isUserRole) {
+      // Hide prompts for user role
       links.push({
         title: 'com_ui_prompts',
         label: '',
@@ -92,7 +104,8 @@ export default function useSideNavLinks({
     if (
       interfaceConfig.parameters === true &&
       isParamEndpoint(endpoint ?? '', endpointType ?? '') === true &&
-      keyProvided
+      keyProvided &&
+      !isUserRole // Hide model parameters for user role
     ) {
       links.push({
         title: 'com_sidepanel_parameters',
@@ -140,6 +153,7 @@ export default function useSideNavLinks({
     hasAccessToPrompts,
     hasAccessToBookmarks,
     hidePanel,
+    user && user.role, // Add user role to dependency array
   ]);
 
   return Links;
