@@ -7,21 +7,25 @@ import { useChatContext, useAssistantsMapContext } from '~/Providers';
 import ControlCombobox from '~/components/ui/ControlCombobox';
 import Icon from '~/components/Endpoints/Icon';
 
-export default function AssistantSwitcher({ isCollapsed }: SwitcherProps) {
+export default function AssistantSwitcher({
+  isCollapsed,
+  openByDefault,
+}: SwitcherProps & { openByDefault?: boolean }) {
   const localize = useLocalize();
   const { setOption } = useSetIndexOptions();
   const { index, conversation } = useChatContext();
 
-  /* `selectedAssistant` must be defined with `null` to cause re-render on update */
   const { assistant_id: selectedAssistant = null, endpoint } = conversation ?? {};
 
   const assistantListMap = useAssistantListMap((res) =>
     res.data.map(({ id, name, metadata }) => ({ id, name, metadata })),
   );
+
   const assistants: Omit<AssistantListItem, 'model'>[] = useMemo(
     () => assistantListMap[endpoint ?? ''] ?? [],
     [endpoint, assistantListMap],
   );
+
   const assistantMap = useAssistantsMapContext();
   const { onSelect } = useSelectAssistant(endpoint as AssistantsEndpoint);
 
@@ -68,6 +72,7 @@ export default function AssistantSwitcher({ isCollapsed }: SwitcherProps) {
   return (
     <ControlCombobox
       selectedValue={currentAssistant?.id ?? ''}
+      openByDefault={openByDefault} // Pass the prop here
       displayValue={
         assistants.find((assistant) => assistant.id === selectedAssistant)?.name ??
         localize('com_sidepanel_select_assistant')

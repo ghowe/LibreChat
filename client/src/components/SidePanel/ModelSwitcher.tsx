@@ -7,7 +7,10 @@ import { useSetIndexOptions, useLocalize } from '~/hooks';
 import { useChatContext } from '~/Providers';
 import { mainTextareaId } from '~/common';
 
-export default function ModelSwitcher({ isCollapsed }: SwitcherProps) {
+export default function ModelSwitcher({
+  isCollapsed,
+  openByDefault,
+}: SwitcherProps & { openByDefault?: boolean }) {
   const localize = useLocalize();
   const modelsQuery = useGetModelsQuery();
   const { conversation } = useChatContext();
@@ -36,6 +39,8 @@ export default function ModelSwitcher({ isCollapsed }: SwitcherProps) {
     [setOption],
   );
 
+  // console.log(openByDefault, 'tttt');
+
   return (
     <ControlCombobox
       displayValue={model ?? ''}
@@ -46,6 +51,7 @@ export default function ModelSwitcher({ isCollapsed }: SwitcherProps) {
       selectedValue={model ?? ''}
       setValue={setModel}
       items={models}
+      openByDefault={openByDefault ?? false} // Use openByDefault prop, default to false
       SelectIcon={
         <MinimalIcon
           isCreatedByUser={false}
