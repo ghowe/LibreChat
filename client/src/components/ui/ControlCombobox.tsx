@@ -4,7 +4,7 @@ import { startTransition, useMemo, useState, useEffect, useRef, memo } from 'rea
 import { cn } from '~/utils';
 import type { OptionWithIcon } from '~/common';
 import { Search } from 'lucide-react';
-import { useAuthContext } from '~/hooks/AuthContext'; // Import the Auth context
+import { useAuthContext } from '~/hooks/AuthContext';
 
 interface ControlComboboxProps {
   selectedValue: string;
@@ -16,6 +16,7 @@ interface ControlComboboxProps {
   selectPlaceholder?: string;
   isCollapsed: boolean;
   SelectIcon?: React.ReactNode;
+  openByDefault?: boolean; // Add this prop
 }
 
 function ControlCombobox({
@@ -28,8 +29,9 @@ function ControlCombobox({
   selectPlaceholder,
   isCollapsed,
   SelectIcon,
+  openByDefault = false, // Default to false
 }: ControlComboboxProps) {
-  const { user } = useAuthContext(); // Get user data from Auth context
+  const { user } = useAuthContext();
 
   // Return null if the user's role is "USER"
   if (user && user.role === 'USER') {
@@ -39,6 +41,9 @@ function ControlCombobox({
   const [searchValue, setSearchValue] = useState('');
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [buttonWidth, setButtonWidth] = useState<number | null>(null);
+  const [isOpen, setIsOpen] = useState(openByDefault); // Initialize based on the prop
+
+  // console.log(isOpen, 'isOpen');
 
   const matches = useMemo(() => {
     return matchSorter(items, searchValue, {
@@ -53,10 +58,15 @@ function ControlCombobox({
     }
   }, [isCollapsed]);
 
+  const toggleDropdown = () => {
+    setIsOpen((prev) => !prev); // Toggle dropdown open state
+  };
+
   return (
     <div className="flex w-full items-center justify-center px-1">
       <Ariakit.ComboboxProvider
         resetValueOnHide
+        open={isOpen}
         setValue={(value) => {
           startTransition(() => {
             setSearchValue(value);
@@ -67,6 +77,7 @@ function ControlCombobox({
           <Ariakit.SelectLabel className="sr-only">{ariaLabel}</Ariakit.SelectLabel>
           <Ariakit.Select
             ref={buttonRef}
+            onClick={toggleDropdown}
             className={cn(
               'flex items-center justify-center gap-2 rounded-full bg-surface-secondary',
               'text-text-primary hover:bg-surface-tertiary',

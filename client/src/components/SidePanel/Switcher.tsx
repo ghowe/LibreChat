@@ -4,14 +4,16 @@ import AssistantSwitcher from './AssistantSwitcher';
 import AgentSwitcher from './AgentSwitcher';
 import ModelSwitcher from './ModelSwitcher';
 
-export default function Switcher(props: SwitcherProps) {
-  if (isAssistantsEndpoint(props.endpoint) && props.endpointKeyProvided) {
-    return <AssistantSwitcher {...props} />;
-  } else if (isAgentsEndpoint(props.endpoint) && props.endpointKeyProvided) {
-    return <AgentSwitcher {...props} />;
-  } else if (isAssistantsEndpoint(props.endpoint)) {
+export default function Switcher(props: SwitcherProps & { openByDefault?: boolean }) {
+  const { endpoint, endpointKeyProvided, openByDefault } = props;
+
+  if (isAssistantsEndpoint(endpoint) && endpointKeyProvided) {
+    return <AssistantSwitcher {...props} openByDefault={openByDefault} />; // Pass openByDefault
+  } else if (isAgentsEndpoint(endpoint) && endpointKeyProvided) {
+    return <AgentSwitcher {...props} openByDefault={openByDefault} />; // If you want to handle this similarly
+  } else if (isAssistantsEndpoint(endpoint)) {
     return null;
   }
 
-  return <ModelSwitcher {...props} />;
+  return <ModelSwitcher {...props} openByDefault={openByDefault} />; // Pass it down here as well
 }

@@ -82,6 +82,7 @@ const EndpointsMenu: FC = () => {
                   isCollapsed={isCollapsed}
                   endpointKeyProvided={keyProvided}
                   endpoint={endpoint}
+                  openByDefault={true} // Set to false to keep it closed by default
                 />
               </div>
             ) : null}
