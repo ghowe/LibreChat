@@ -2,7 +2,7 @@
 # https://www.librechat.ai/docs/configuration/librechat_yaml
 
 # Configuration version (required)
-# version: 1.1.7
+version: 1.1.7
 
 # Cache settings: Set to true to enable caching
 #TODO change to true after development
@@ -104,7 +104,7 @@ registration:
 #     userWindowInMinutes: 60  # Rate limit window for conversation imports per user
 
 # Definition of custom endpoints
-endpoints:
+# endpoints:
   # assistants:
     # disableBuilder: false # Disable Assistants Builder Interface by setting to `true`
     # pollIntervalMs: 3000  # Polling interval for checking assistant updates
