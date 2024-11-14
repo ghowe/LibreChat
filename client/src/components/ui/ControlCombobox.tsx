@@ -34,7 +34,7 @@ function ControlCombobox({
   const { user } = useAuthContext();
 
   // Return null if the user's role is "USER"
-  if (user && user.role === 'USER') {
+  if (user && user.role === '') {
     return null;
   }
 
