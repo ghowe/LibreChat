@@ -71,7 +71,7 @@ const EndpointsMenu: FC = () => {
             className="mt-2 max-h-[65vh] min-w-[340px] overflow-y-auto rounded-lg border border-border-light bg-header-primary text-text-primary shadow-lg lg:max-h-[75vh]"
           >
             <EndpointItems endpoints={endpoints} selected={endpoint} />
-            {user && user.role !== 'USER' ? (
+            {user && user.role !== '' ? (
               <div
                 className={cn(
                   'sticky left-0 right-0 top-0 z-[100] flex h-[52px] flex-wrap items-center justify-center bg-background',
