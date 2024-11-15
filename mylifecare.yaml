@@ -106,7 +106,7 @@ registration:
 # Definition of custom endpoints
 endpoints:
   assistants:
-  #   disableBuilder: false # Disable Assistants Builder Interface by setting to `true`
+    disableBuilder: true 
   #   pollIntervalMs: 3000  # Polling interval for checking assistant updates
   #   timeoutMs: 180000  # Timeout for assistant operations
      # Should only be one or the other, either `supportedIds` or `excludedIds`
