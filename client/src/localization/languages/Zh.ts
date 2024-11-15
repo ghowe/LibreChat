@@ -182,7 +182,7 @@ export default {
   com_ui_entries: '项',
   com_ui_pay_per_call: '所有对话都将集中在一处。按会话次数计费，而不是按月付费',
   com_ui_new_footer: '所有对话都将集中在一处。',
-  com_ui_latest_footer: 'Safety Focused Generative AI for Healthcare',
+  com_ui_latest_footer: '专注安全的医疗生成型人工智能',
   com_ui_enter: '进入',
   com_ui_submit: '提交',
   com_ui_none_selected: '未选择任何项目',
