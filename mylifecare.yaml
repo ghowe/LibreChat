@@ -104,9 +104,9 @@ registration:
 #     userWindowInMinutes: 60  # Rate limit window for conversation imports per user
 
 # Definition of custom endpoints
-endpoints:
-  assistants:
-    disableBuilder: true 
+# endpoints:
+#   assistants:
+#     disableBuilder: true 
   #   pollIntervalMs: 3000  # Polling interval for checking assistant updates
   #   timeoutMs: 180000  # Timeout for assistant operations
      # Should only be one or the other, either `supportedIds` or `excludedIds`
