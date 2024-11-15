@@ -104,11 +104,11 @@ registration:
 #     userWindowInMinutes: 60  # Rate limit window for conversation imports per user
 
 # Definition of custom endpoints
-# endpoints:
-#   assistants:
-#     disableBuilder: true 
-  #   pollIntervalMs: 3000  # Polling interval for checking assistant updates
-  #   timeoutMs: 180000  # Timeout for assistant operations
+endpoints:
+  assistants:
+    disableBuilder: true 
+    pollIntervalMs: 3000  # Polling interval for checking assistant updates
+    timeoutMs: 180000  # Timeout for assistant operations
      # Should only be one or the other, either `supportedIds` or `excludedIds`
      # supportedIds: ["asst_xoRa0SWVF2yAJ7OLlanaK0Vz", "asst_T25e0zH64Nsg83BIlNl9ujul"]
      # excludedIds: ["asst_excludedAssistantId"]
@@ -118,24 +118,24 @@ registration:
   #   retrievalModels: ["gpt-4-turbo-preview"]
   #   # (optional) Assistant Capabilities available to all users. Omit the ones you wish to exclude. Defaults to list below.
   #   capabilities: ["code_interpreter", "retrieval", "actions", "tools", "image_vision"]
-  # custom:
+  custom:
     # Groq Example
-    # - name: 'groq'
-    #   apiKey: '${GROQ_API_KEY}'
-    #   baseURL: 'https://api.groq.com/openai/v1/'
-    #   models:
-    #     default:
-    #       [
-    #         'llama3-70b-8192',
-    #         'llama3-8b-8192',
-    #         'llama2-70b-4096',
-    #         'mixtral-8x7b-32768',
-    #         'gemma-7b-it',
-    #       ]
-    #     fetch: false
-    #   titleConvo: true
-    #   titleModel: 'mixtral-8x7b-32768'
-    #   modelDisplayLabel: 'groq'
+    - name: 'groq'
+      apiKey: '${GROQ_API_KEY}'
+      baseURL: 'https://api.groq.com/openai/v1/'
+      models:
+        default:
+          [
+            'llama3-70b-8192',
+            'llama3-8b-8192',
+            'llama2-70b-4096',
+            'mixtral-8x7b-32768',
+            'gemma-7b-it',
+          ]
+        fetch: false
+      titleConvo: true
+      titleModel: 'mixtral-8x7b-32768'
+      modelDisplayLabel: 'groq'
 
     # Mistral AI Example
     # - name: 'Mistral' # Unique name for the endpoint
